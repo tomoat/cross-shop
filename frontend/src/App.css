@@ -1,0 +1,125 @@
+/* 导入全局样式 */
+@import './styles/Global.css';
+
+/* App容器样式 */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 主内容区域 */
+main {
+  flex: 1;
+  min-height: calc(100vh - 120px); /* 减去导航栏和页脚的高度 */
+  padding: var(--spacing-lg) 0;
+}
+
+/* 页面标题样式 */
+.page-title {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+/* 面包屑导航 */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.breadcrumb-item {
+  color: var(--text-secondary);
+}
+
+.breadcrumb-item.active {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.breadcrumb-separator {
+  color: var(--text-tertiary);
+}
+
+/* 错误页面样式 */
+.error-page {
+  text-align: center;
+  padding: var(--spacing-xxl) 0;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-page h2 {
+  font-size: 64px;
+  font-weight: var(--font-weight-bold);
+  color: var(--error-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.error-page p {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* 列表页面样式 */
+.list-container {
+  background-color: var(--white);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.list-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+/* 产品网格布局 */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  main {
+    padding: var(--spacing-md) 0;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--spacing-md);
+  }
+  
+  .page-title {
+    font-size: var(--font-size-xl);
+  }
+}

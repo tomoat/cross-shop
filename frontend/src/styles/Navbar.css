@@ -1,0 +1,393 @@
+/* 导航栏样式 */
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: var(--white, #fff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  transition: box-shadow 0.3s ease;
+}
+
+.navbar:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+/* Logo样式 */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--primary-color, #1890ff);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+/* 导航菜单 */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-bottom: none;
+}
+
+.nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  color: var(--text-primary, #333);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color, #1890ff);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background-color: var(--primary-color, #1890ff);
+  border-radius: 1px;
+}
+
+/* 导航右侧 */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 图标按钮 */
+.nav-icon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary, #333);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.nav-icon:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--primary-color, #1890ff);
+}
+
+/* 用户菜单 */
+.user-avatar {
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--primary-color, #1890ff);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 移动端菜单按钮 */
+.mobile-menu-btn {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary, #333);
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: 16px;
+  }
+  
+  .nav-link {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .navbar .container {
+    padding: 0 12px;
+  }
+  
+  .logo h1 {
+    font-size: 20px;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
+
+/* 移动端侧边菜单 */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-menu-close {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #999;
+}
+
+.mobile-menu-content {
+  padding: 16px;
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: 12px 0;
+  color: var(--text-primary, #333);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobile-menu-link:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu-link.active {
+  color: var(--primary-color, #1890ff);
+}
+
+/* 登录注册按钮样式 */
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* 登录按钮样式 */
+.auth-buttons .ant-btn-default {
+  background-color: transparent;
+  border-color: var(--primary-color, #1890ff);
+  color: var(--primary-color, #1890ff);
+  border-radius: 4px;
+  padding: 4px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: none;
+  min-width: 64px;
+  width: 47px;
+  white-space: nowrap;
+  line-height: 1.5;
+  height: 32px;
+  overflow: visible;
+}
+
+.auth-buttons .ant-btn-default:hover {
+  background-color: rgba(24, 144, 255, 0.05);
+  border-color: var(--primary-color, #1890ff);
+  color: var(--primary-color, #1890ff);
+  box-shadow: none;
+}
+
+.auth-buttons .ant-btn-default:active,
+.auth-buttons .ant-btn-default:focus {
+  background-color: rgba(24, 144, 255, 0.1);
+  border-color: var(--primary-color, #1890ff);
+  color: var(--primary-color, #1890ff);
+  box-shadow: none;
+  min-width: 64px;
+  position: relative;
+}
+
+/* 注册按钮样式 */
+.auth-buttons .ant-btn-primary {
+  background-color: var(--primary-color, #1890ff);
+  border-color: var(--primary-color, #1890ff);
+  color: white;
+  border-radius: 4px;
+  padding: 4px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: none;
+  min-width: 64px;
+  width: 47px;
+  white-space: nowrap;
+  line-height: 1.5;
+  height: 32px;
+  overflow: visible;
+}
+
+.auth-buttons .ant-btn-primary:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+  box-shadow: none;
+}
+
+.auth-buttons .ant-btn-primary:active,
+.auth-buttons .ant-btn-primary:focus {
+  background-color: #096dd9;
+  border-color: #096dd9;
+  box-shadow: none;
+  min-width: 64px;
+}
+
+/* Link包裹按钮的样式优化 */
+.auth-buttons a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.auth-buttons a:active .ant-btn {
+  transform: translateY(0);
+}
+
+/* 确保所有状态下的按钮尺寸一致 */
+.auth-buttons .ant-btn {
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* 修复点击时的视觉效果 */
+.auth-buttons .ant-btn:focus::after,
+.auth-buttons .ant-btn:active::after {
+  content: none;
+}
+
+.auth-buttons .ant-btn:focus-visible {
+  outline: 2px solid rgba(24, 144, 255, 0.2);
+  outline-offset: 2px;
+}
+
+/* 用户按钮样式 */
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary, #333);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.user-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--primary-color, #1890ff);
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 响应式按钮样式 */
+@media (max-width: 768px) {
+  .auth-buttons {
+    gap: 6px;
+  }
+  
+  .auth-buttons .ant-btn,
+  .user-button {
+    font-size: 12px;
+    padding: 2px 12px;
+  }
+  
+  .username {
+    display: none;
+  }
+}

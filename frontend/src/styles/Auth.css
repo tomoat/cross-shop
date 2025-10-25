@@ -1,0 +1,674 @@
+/* 登录和注册页面样式 */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) 0;
+  background-color: var(--background-color);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(22, 119, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 80% 60%, rgba(245, 34, 45, 0.05) 0%, transparent 25%),
+    radial-gradient(circle at 40% 80%, rgba(251, 191, 36, 0.05) 0%, transparent 30%);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 460px;
+  background-color: var(--white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: authContainerSlideIn 0.5s ease-out;
+}
+
+@keyframes authContainerSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    box-shadow: var(--shadow-sm);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+.auth-header {
+  padding: var(--spacing-xl);
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary-light), var(--background-color));
+  border-bottom: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: authHeaderGradient 8s ease infinite;
+}
+
+@keyframes authHeaderGradient {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.auth-title {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.auth-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 1;
+}
+
+/* 表单样式增强 */
+.auth-form {
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  position: relative;
+}
+
+.auth-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  position: relative;
+}
+
+.auth-form .form-label {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-form .form-input-container {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.auth-form .form-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  position: relative;
+  z-index: 1;
+}
+
+.auth-form .form-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.auth-form .form-input:not(:placeholder-shown) {
+  border-color: var(--primary-color);
+}
+
+.auth-form .form-input.error {
+  border-color: var(--error-color);
+  box-shadow: 0 0 0 3px rgba(245, 34, 45, 0.15);
+}
+
+.auth-form .form-input.success {
+  border-color: var(--success-color);
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.15);
+}
+
+.auth-form .form-input-icon {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-lg);
+  pointer-events: none;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.auth-form .form-input:focus + .form-input-icon {
+  color: var(--primary-color);
+}
+
+/* 错误提示增强 */
+.auth-form .error-message {
+  font-size: var(--font-size-xs);
+  color: var(--error-color);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: all 0.2s ease;
+}
+
+.auth-form .form-input.error + .error-message {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 密码可见性切换 */
+.password-toggle {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--border-radius-sm);
+  z-index: 3;
+  transition: all 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: var(--primary-color);
+  background-color: var(--background-color);
+}
+
+/* 提交按钮增强 */
+.auth-form .submit-button {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(22, 119, 255, 0.3);
+}
+
+.auth-form .submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.auth-form .submit-button:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.4);
+}
+
+.auth-form .submit-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.auth-form .submit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(22, 119, 255, 0.3);
+}
+
+.auth-form .submit-button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 加载状态 */
+.submit-button.loading {
+  position: relative;
+  color: transparent;
+}
+
+.submit-button.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid transparent;
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 记住密码和忘记密码 */
+.auth-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remember-me:hover {
+  transform: translateX(2px);
+}
+
+.remember-me input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+.remember-me input[type="checkbox"]:checked {
+  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
+}
+
+.remember-me label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remember-me:hover label {
+  color: var(--primary-color);
+}
+
+.forgot-password {
+  font-size: var(--font-size-sm);
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  display: inline-block;
+  padding: 4px 0;
+}
+
+.forgot-password::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width 0.2s ease;
+}
+
+.forgot-password:hover {
+  color: var(--primary-hover);
+}
+
+.forgot-password:hover::after {
+  width: 100%;
+}
+
+/* 切换登录注册 */
+.auth-switch {
+  margin-top: var(--spacing-xl);
+  text-align: center;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.auth-switch-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.auth-switch-link {
+  font-size: var(--font-size-sm);
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  margin-left: var(--spacing-xs);
+  transition: all 0.2s ease;
+  position: relative;
+  display: inline-block;
+  padding: 2px 0;
+}
+
+.auth-switch-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width 0.2s ease;
+}
+
+.auth-switch-link:hover {
+  color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.auth-switch-link:hover::after {
+  width: 100%;
+}
+
+/* 社交登录增强 */
+.social-login {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.social-login-title {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-md);
+  position: relative;
+}
+
+.social-login-title::before,
+.social-login-title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.social-login-title::before {
+  left: 0;
+}
+
+.social-login-title::after {
+  right: 0;
+}
+
+.social-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-full);
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-size: var(--font-size-lg);
+}
+
+/* 社交登录品牌颜色 */
+.social-btn.facebook {
+  color: #1877F2;
+  border-color: #1877F2;
+}
+
+.social-btn.facebook:hover {
+  background-color: #1877F2;
+  color: var(--white);
+  border-color: #1877F2;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+.social-btn.google {
+  color: #EA4335;
+  border-color: #EA4335;
+}
+
+.social-btn.google:hover {
+  background-color: #EA4335;
+  color: var(--white);
+  border-color: #EA4335;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(234, 67, 53, 0.3);
+}
+
+.social-btn.apple {
+  color: #000;
+  border-color: #000;
+}
+
+.social-btn.apple:hover {
+  background-color: #000;
+  color: var(--white);
+  border-color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.social-btn.twitter {
+  color: #1DA1F2;
+  border-color: #1DA1F2;
+}
+
+.social-btn.twitter:hover {
+  background-color: #1DA1F2;
+  color: var(--white);
+  border-color: #1DA1F2;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
+}
+
+/* 社交按钮波纹效果 */
+.social-btn::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  transform: scale(0);
+  transition: transform 0.4s ease;
+}
+
+.social-btn:hover::before {
+  transform: scale(2);
+}
+
+/* 表单动画 */
+@keyframes formSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-form .form-group {
+  animation: formSlideIn 0.3s ease-out;
+}
+
+.auth-form .form-group:nth-child(2) { animation-delay: 0.1s; }
+.auth-form .form-group:nth-child(3) { animation-delay: 0.2s; }
+.auth-form .form-group:nth-child(4) { animation-delay: 0.3s; }
+.auth-form .form-group:nth-child(5) { animation-delay: 0.4s; }
+
+/* 响应式设计优化 */
+@media (max-width: 768px) {
+  .auth-page {
+    padding: var(--spacing-lg) 0;
+    min-height: 100vh;
+  }
+  
+  .auth-container {
+    margin: 0 var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    animation: authContainerSlideIn 0.4s ease-out;
+  }
+  
+  .auth-header,
+  .auth-form {
+    padding: var(--spacing-lg);
+  }
+  
+  .auth-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .auth-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .social-buttons {
+    gap: var(--spacing-sm);
+  }
+  
+  .social-btn {
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: var(--spacing-md) 0;
+  }
+  
+  .auth-container {
+    margin: 0 var(--spacing-sm);
+  }
+  
+  .auth-header,
+  .auth-form {
+    padding: var(--spacing-md);
+  }
+  
+  .auth-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .auth-form .form-input {
+    padding: var(--spacing-sm) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+  
+  .social-login-title::before,
+  .social-login-title::after {
+    width: 25%;
+  }
+}
+
+/* 暗色模式适配 */
+@media (prefers-color-scheme: dark) {
+  .auth-page {
+    background-color: var(--dark-background);
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(22, 119, 255, 0.1) 0%, transparent 20%),
+      radial-gradient(circle at 80% 60%, rgba(245, 34, 45, 0.1) 0%, transparent 25%);
+  }
+  
+  .auth-container {
+    background-color: var(--dark-surface);
+    box-shadow: var(--dark-shadow-lg);
+  }
+  
+  .auth-header {
+    background: linear-gradient(135deg, var(--dark-surface-highlight), var(--dark-background));
+  }
+  
+  .auth-title {
+    color: var(--dark-text-primary);
+  }
+  
+  .auth-subtitle {
+    color: var(--dark-text-secondary);
+  }
+  
+  .auth-form .form-label {
+    color: var(--dark-text-primary);
+  }
+  
+  .auth-form .form-input {
+    background-color: var(--dark-surface-highlight);
+    border-color: var(--dark-border-color);
+    color: var(--dark-text-primary);
+  }
+  
+  .auth-form .form-input::placeholder {
+    color: var(--dark-text-tertiary);
+  }
+  
+  .remember-me label {
+    color: var(--dark-text-secondary);
+  }
+  
+  .auth-switch-text {
+    color: var(--dark-text-secondary);
+  }
+  
+  .social-btn {
+    background-color: var(--dark-surface-highlight);
+    border-color: var(--dark-border-color);
+  }
+  
+  .social-login-title {
+    color: var(--dark-text-tertiary);
+  }
+  
+  .social-login-title::before,
+  .social-login-title::after {
+    background-color: var(--dark-border-color);
+  }
+}
