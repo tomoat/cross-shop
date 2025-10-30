@@ -1,0 +1,154 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  role: String!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type AuthResponse {
+  accessToken: String!
+  user: User!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  price: Float!
+  currency: String!
+  stock: Float!
+  categoryId: ID!
+  sellerId: ID!
+  images: [String!]
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  description: String
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+type OrderItem {
+  id: ID!
+  orderId: ID!
+  productId: ID!
+  quantity: Float!
+  price: Float!
+}
+
+type Order {
+  id: ID!
+  userId: ID!
+  status: OrderStatus!
+  totalAmount: Float!
+  shippingAddress: String!
+  items: [OrderItem!]!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  COMPLETED
+  CANCELLED
+}
+
+type CartItem {
+  id: ID!
+  cartId: ID!
+  productId: ID!
+  quantity: Float!
+  price: Float!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+type Cart {
+  id: ID!
+  userId: ID!
+  items: [CartItem!]!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+type Payment {
+  id: ID!
+  orderId: ID!
+  userId: ID!
+  amount: Float!
+  paymentMethod: PaymentMethod!
+  status: PaymentStatus!
+  transactionId: String
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  PAYPAL
+  BANK_TRANSFER
+  CRYPTO
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+type Query {
+  getAllUsers: [User!]!
+  getCurrentUser: User!
+  getUserById(id: String!): User!
+  getAllProducts(categoryId: String, search: String, page: Float! = 1, limit: Float! = 10): [Product!]!
+  getProductById(id: String!): Product!
+  getAllCategories: [Category!]!
+  getCategoryById(id: String!): Category!
+  getMyCart: Cart!
+  getCartTotal: Float!
+  getMyOrders: [Order!]!
+  getAllOrders: [Order!]!
+  getOrderById(id: String!): Order!
+  getMyPayments: [Payment!]!
+  getAllPayments: [Payment!]!
+  getPaymentById(id: String!): Payment!
+  generatePaymentReport(startDate: Timestamp, endDate: Timestamp): String!
+}
+
+type Mutation {
+  login(email: String!, password: String!): AuthResponse!
+  register(name: String!, email: String!, password: String!, role: String): User!
+  createProduct(name: String!, description: String!, price: Float!, stock: Float!, categoryId: String!, sellerId: String!, currency: String, images: [String!]): Product!
+  updateProduct(id: String!, name: String, description: String, price: Float, stock: Float, categoryId: String, currency: String, images: [String!]): Product!
+  deleteProduct(id: String!): Boolean!
+  createCategory(name: String!, description: String): Category!
+  updateCategory(id: String!, name: String, description: String): Category!
+  deleteCategory(id: String!): Boolean!
+  addToCart(productId: String!, quantity: Float!): Cart!
+  updateCartItem(itemId: String!, quantity: Float!): Cart!
+  removeFromCart(itemId: String!): Cart!
+  clearCart: Cart!
+  createOrder(shippingAddress: String!, paymentMethod: String!): Order!
+  updateOrderStatus(id: String!, status: String!): Order!
+  processPayment(orderId: String!, paymentMethod: String!): Payment!
+  refundPayment(paymentId: String!, reason: String!): Payment!
+}
