@@ -31,6 +31,14 @@
 - **认证**: JWT
 - **路由**: Fastify路由系统
 
+### 后端 (NestJS版本)
+- **运行环境**: Node.js
+- **Web框架**: NestJS
+- **数据库**: PostgreSQL + Prisma ORM
+- **认证**: JWT + Passport.js
+- **微服务**: NATS
+- **API**: RESTful + GraphQL
+
 ## 功能特性
 
 ### 用户管理
@@ -81,6 +89,13 @@ cross-shop/
 │   ├── routes/       # 路由
 │   ├── scripts/      # 脚本文件
 │   └── server.js     # 服务器入口
+├── backend-nest/     # NestJS后端服务
+│   ├── src/          # 源代码
+│   │   ├── modules/  # 功能模块
+│   │   ├── prisma/   # Prisma配置
+│   │   └── microservices/ # 微服务配置
+│   ├── prisma/       # Prisma schema
+│   └── main.ts       # 应用入口
 └── frontend/         # React前端应用
     ├── public/       # 静态资源
     ├── src/          # 源代码
@@ -149,6 +164,31 @@ cp .env.example .env
 
 # 启动服务
 pnpm dev
+```
+
+### 后端 (NestJS版本)
+
+```bash
+# 进入NestJS后端目录
+cd backend-nest
+
+# 安装依赖
+pnpm install
+
+# 配置环境变量
+cp .env.example .env
+# 编辑.env文件，设置数据库连接等信息
+
+# 数据库迁移
+npx prisma migrate dev --name init
+npx prisma generate
+
+# 开发模式启动
+pnpm start:dev
+
+# 生产模式启动
+pnpm build
+pnpm start:prod
 ```
 
 ## API接口文档
